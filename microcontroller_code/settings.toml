@@ -1,0 +1,3 @@
+# settings.toml
+CIRCUITPY_WIFI_SSID = "holiday"
+CIRCUITPY_WIFI_PASSWORD = "i3021302"
