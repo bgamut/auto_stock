@@ -7,6 +7,7 @@ from dateutil.relativedelta import *
 #import tweepy
 #import os
 import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
 #import matplotlib.patches as patches
 import schedule
 def regression(x,y):
@@ -66,11 +67,19 @@ def main():
 
     data.sort(key=lambda x:x[6],reverse=True)
 
+    for i in reversed(range(len(data))):
+        if data[i][2][-1]>data[i][5][-1]:
+            data.pop(i)
+
     legend_list=[]
-    plt.rcParams['font.family'] ='AppleGothic'
+    #plt.rcParams['font.family'] ='AppleGothic'
+    font_path = 'C:\\Windows\\Fonts\\gulim.ttc'
+    font_name = fm.FontProperties(fname=font_path).get_name()
+    plt.rc('font',family=font_name)
+
     plt.rcParams['axes.unicode_minus'] =False
-    for i in range(5):
-        colors=['red','orange','green','blue','purple']
+    for i in range(10):
+        colors=['red','orange','green','blue','purple','salmon','chocolate','springgreen','aqua','magenta']
         #plt.title(str(data[i][0])+ " "+ str(data[i][5])+"%")
 
         plt.figure(str(datetime.now()))
@@ -81,8 +90,8 @@ def main():
         #below is the most recent closing price
         print(data[i][1][len(data[i][1])-1])
     plt.figure(str(datetime.now()))
-    for i in range(5):
-        colors=['red','orange','green','blue','purple']
+    for i in range(10):
+        colors=['red','orange','green','blue','purple','salmon','chocolate','springgreen','aqua','magenta']
         plt.plot(data[i][2],color=colors[i])
         legend_list.append(str(data[i][1]))
         plt.plot(data[i][5],linestyle='dashed',color=colors[i])
@@ -103,16 +112,17 @@ def plot_graph():
 
         plt.plot([1,2,3,4,5,6,7,8,9,10])
     plt.show()
-"""
+
 def weekday_job(x, t=None):
     week = datetime.today().weekday()
     if t is not None and week < 5:
         schedule.every().day.at(t).do(x)
-weekday_job(main, '17:30')
+weekday_job(main, '15:10')
 """
 def friday_job(x,t=None):
     schedule.every().friday.at(t).do(x)
-friday_job(main,"17:10")
+friday_job(main,"15:40")
+"""
 """
 def saturday_job(x,t=None):
     schedule.every().saturday.at(t).do(x)
